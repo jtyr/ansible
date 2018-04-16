@@ -59,7 +59,9 @@ options:
     choices: [ rdma, tcp, tcp,rdma ]
   bricks:
     description:
-      - Brick paths on servers. Multiple brick paths can be separated by commas.
+      - List of brick paths on servers.
+      - Multiple brick paths can be separated by commas or it can also be a
+        regular YAML array.
     aliases: [ brick ]
   start_on_create:
     description:
@@ -371,7 +373,7 @@ def main():
             disperses=dict(type='int'),
             redundancies=dict(type='int'),
             transport=dict(type='str', default='tcp', choices=['tcp', 'rdma', 'tcp,rdma']),
-            bricks=dict(type='str', aliases=['brick']),
+            bricks=dict(type='list', aliases=['brick']),
             start_on_create=dict(type='bool', default=True),
             rebalance=dict(type='bool', default=False),
             options=dict(type='dict', default={}),
